@@ -10,7 +10,7 @@ public class ProfessoresAlunoResouce {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String ProfessoresDoAluno() {
+    public String methodname() {
         return "Heineken";
     }
 }

@@ -1,10 +1,13 @@
 package br.com.gabriel;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
@@ -13,12 +16,11 @@ public class Disciplinas extends PanacheEntity{
 
     public String nome;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "aluno_id")
-    private Aluno aluno;
+    @OneToMany(cascade = CascadeType.ALL)    
+    private List<Aluno> aluno;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "professor_id")
+    @OneToOne(cascade = CascadeType.ALL)  
+    @JoinColumn(name = "professor_id")  
     private Professor professor;
 
 

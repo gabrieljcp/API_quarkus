@@ -17,4 +17,8 @@ public class Professor extends PanacheEntity{
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Disciplinas> disciplinas;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Aluno> aluno;
+
 }
