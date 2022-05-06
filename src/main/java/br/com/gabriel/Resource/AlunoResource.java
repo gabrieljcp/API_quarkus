@@ -25,6 +25,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import br.com.gabriel.Model.Aluno;
+import br.com.gabriel.Model.Disciplina;
 import br.com.gabriel.Repository.AlunoRepository;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheEntityResource;
 
@@ -54,7 +55,7 @@ public class AlunoResource {
     @Transactional    
     public Aluno adicionarAluno(Aluno aluno) {
         aluno.persist();
-        return aluno ;
+        return aluno;
     }
 
     @PUT

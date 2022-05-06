@@ -1,6 +1,13 @@
 package br.com.gabriel.Model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.Getter;
@@ -12,6 +19,19 @@ import lombok.Setter;
 public class Vinculo extends PanacheEntity{
 
     public String nome;
+
+    @ManyToMany 
+    @JoinTable(name = "aluno_disciplina",  
+            joinColumns = @JoinColumn(name = "vinculo_id"),
+            inverseJoinColumns = @JoinColumn(name = "disciplina_id"))
+    private List<Disciplina> disciplina;
+
+    @ManyToMany 
+    @JoinTable(name = "aluno_disciplina",  
+            joinColumns = @JoinColumn(name = "vinculo_id"),
+            inverseJoinColumns = @JoinColumn(name = "aluno_id"))
+    private List<Aluno> aluno;
+
 
     
 }

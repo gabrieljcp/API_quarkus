@@ -21,10 +21,7 @@ public class Professor extends PanacheEntity{
 
     public Integer idade;
 
-    // @OneToMany(cascade = CascadeType.ALL)
-    // private List<Disciplina> disciplinas;
-
-    // @OneToMany(cascade = CascadeType.ALL)
-    // private List<Aluno> aluno;
+    @OneToMany
+    private List<Disciplina> disciplinas;
 
 }
