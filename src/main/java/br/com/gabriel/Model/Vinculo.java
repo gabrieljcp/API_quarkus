@@ -20,18 +20,6 @@ public class Vinculo extends PanacheEntity{
 
     public String nome;
 
-    @ManyToMany 
-    @JoinTable(name = "aluno_disciplina",  
-            joinColumns = @JoinColumn(name = "vinculo_id"),
-            inverseJoinColumns = @JoinColumn(name = "disciplina_id"))
-    private List<Disciplina> disciplina;
-
-    @ManyToMany 
-    @JoinTable(name = "aluno_disciplina",  
-            joinColumns = @JoinColumn(name = "vinculo_id"),
-            inverseJoinColumns = @JoinColumn(name = "aluno_id"))
-    private List<Aluno> aluno;
-
 
     
 }

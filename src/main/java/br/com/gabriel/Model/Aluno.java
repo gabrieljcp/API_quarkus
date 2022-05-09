@@ -36,15 +36,25 @@ public class Aluno extends PanacheEntityBase{
 
     public Integer idade;
 
-    // @ManyToMany 
-    // @JoinTable(name = "aluno_disciplina",  
-    //         joinColumns = @JoinColumn(name = "aluno_id"),
-    //         inverseJoinColumns = @JoinColumn(name = "disciplina_id"))
-    // private List<Disciplina> disciplina;
+    public String getNome() {
+        return nome;
+    }
 
-    @OneToMany(cascade = {CascadeType.PERSIST}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_disciplina")
-    private List<Disciplina> disciplina;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
+    }
+
+   
+    
+
 
 
 

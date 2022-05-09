@@ -16,9 +16,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
+import br.com.gabriel.DTO.DisciplinaDTO;
+import br.com.gabriel.DTO.ProfessorDTO;
 import br.com.gabriel.Model.Disciplina;
+import br.com.gabriel.Model.Professor;
 import br.com.gabriel.Repository.DisciplinaRepository;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheEntityResource;
 import io.quarkus.rest.data.panache.MethodProperties;
@@ -45,11 +49,19 @@ public class DisciplinaResource {
         return Disciplina.findById(id);
     }
 
+    // @POST
+    // @Transactional    
+    // public Disciplina adicionarDisciplina(Disciplina Disciplina) {
+    //     Disciplina.persist();
+    //     return Disciplina ;
+    // }
+
     @POST
     @Transactional    
-    public Disciplina adicionarDisciplina(Disciplina Disciplina) {
-        Disciplina.persist();
-        return Disciplina ;
+    public void adicionarDiciplina(@RequestBody DisciplinaDTO dto) {
+        Disciplina disciplina = new Disciplina();
+        disciplina.setNome(dto.getNome());    
+        disciplina.persist();    
     }
 
     @PUT

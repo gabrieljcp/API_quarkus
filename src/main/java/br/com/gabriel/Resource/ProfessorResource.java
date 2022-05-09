@@ -15,8 +15,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
+import br.com.gabriel.DTO.ProfessorDTO;
 import br.com.gabriel.Model.Professor;
 import br.com.gabriel.Repository.ProfessorRepository;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheEntityResource;
@@ -43,11 +45,19 @@ public class ProfessorResource {
         return Professor.findById(id);
     }
 
+    // @POST
+    // @Transactional    
+    // public Professor adicionarProfessor(Professor Professor) {
+    //     Professor.persist();
+    //     return Professor ;
+    // }
     @POST
     @Transactional    
-    public Professor adicionarProfessor(Professor Professor) {
-        Professor.persist();
-        return Professor ;
+    public void adicionarProfessor(@RequestBody ProfessorDTO dto) {
+        Professor professor = new Professor();
+        professor.setNome(dto.getNome());
+        professor.setIdade(dto.getIdade());
+        professor.persist();    
     }
 
     @PUT

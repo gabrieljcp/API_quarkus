@@ -21,7 +21,26 @@ public class Professor extends PanacheEntity{
 
     public Integer idade;
 
-    @OneToMany
-    private List<Disciplina> disciplinas;
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
+    }
+
+    
+
+   
+
+    
 
 }
