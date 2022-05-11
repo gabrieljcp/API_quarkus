@@ -11,14 +11,12 @@ import br.com.gabriel.Model.Disciplina;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+
 
 public class AlunoDTO {
     
     private String nome;
     private Integer idade;
-    
 
     public void setNome(String nome) {
         this.nome = nome;

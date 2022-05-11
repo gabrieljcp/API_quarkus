@@ -8,7 +8,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,9 +15,13 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Vinculo extends PanacheEntity{
+public class Matricula extends PanacheEntity{
 
-    public String nome;
+    @ManyToOne
+    public Aluno aluno;
+    
+    @ManyToOne
+    public Disciplina disciplina;
 
 
     

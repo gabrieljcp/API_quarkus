@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
@@ -15,6 +16,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.transaction.Transactional;
+
+import br.com.gabriel.DTO.DisciplinaDTO;
+
 import javax.persistence.JoinColumn;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
@@ -29,12 +33,16 @@ import lombok.Setter;
 public class Aluno extends PanacheEntityBase{
 
     @Id
-    @GeneratedValue
-    public Long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	public Long id;
+
 
     public String nome;
 
     public Integer idade;
+
+    @OneToMany(mappedBy = "aluno")
+    private List<Matricula> matriculas; 
 
     public String getNome() {
         return nome;

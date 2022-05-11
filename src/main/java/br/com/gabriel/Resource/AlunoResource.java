@@ -27,6 +27,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import br.com.gabriel.Model.Aluno;
 import br.com.gabriel.Model.Disciplina;
 import br.com.gabriel.Repository.AlunoRepository;
+import br.com.gabriel.Service.AlunoService;
 import br.com.gabriel.DTO.AlunoDTO;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheEntityResource;
 
@@ -41,7 +42,9 @@ public class AlunoResource {
     @Inject
     private AlunoRepository alunoRepository;
 
-
+    @Inject
+    private AlunoService alunoService;
+    
     @GET    
     public List<Aluno> buscarAlunos(){
         return alunoRepository.listAll();
@@ -53,20 +56,14 @@ public class AlunoResource {
         return Aluno.findById(id);
     }
 
-
-    // @POST
-    // @Transactional    
-    // public Aluno adicionarAluno(Aluno aluno) {
-    //     aluno.persist();
-    //     return aluno;
-    // }
     @POST
     @Transactional    
     public void adicionarAluno(@RequestBody AlunoDTO dto) {
-        Aluno aluno = new Aluno();
-        aluno.setNome(dto.getNome());
-        aluno.setIdade(dto.getIdade());
-        aluno.persist();    
+        alunoService.adicionarAluno(dto);
+        // Aluno aluno = new Aluno();
+        // aluno.setNome(dto.getNome());
+        // aluno.setIdade(dto.getIdade());
+        // aluno.persist();    
     }
 
     @PUT
@@ -77,8 +74,6 @@ public class AlunoResource {
         if(entity == null) {
             throw new NotFoundException();
         }
-
-        // map all fields from the aluno parameter to the existing entity
         entity.nome = aluno.nome; 
         entity.idade = aluno.idade;
         

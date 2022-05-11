@@ -21,6 +21,9 @@ public class Professor extends PanacheEntity{
 
     public Integer idade;
 
+    @OneToMany(mappedBy = "professor")
+    private List<Disciplina> disciplina; 
+
     public String getNome() {
         return nome;
     }
