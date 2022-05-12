@@ -1,22 +1,15 @@
 package br.com.gabriel.DTO;
 
-import java.util.List;
-
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.Entity;
 
-import br.com.gabriel.Model.Disciplina;
-import lombok.Getter;
-import lombok.Setter;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
-
-
-public class AlunoDTO {
+public class AlunoDTO extends PanacheEntityBase{
     
-    private String nome;
-    private Integer idade;
+    public String nome;
+    public Integer idade;
 
     public void setNome(String nome) {
         this.nome = nome;

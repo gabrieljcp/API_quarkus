@@ -19,14 +19,10 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
-import br.com.gabriel.DTO.DisciplinaDTO;
-import br.com.gabriel.DTO.ProfessorDTO;
 import br.com.gabriel.Model.Disciplina;
-import br.com.gabriel.Model.Professor;
 import br.com.gabriel.Repository.DisciplinaRepository;
-import io.quarkus.hibernate.orm.rest.data.panache.PanacheEntityResource;
-import io.quarkus.rest.data.panache.MethodProperties;
-import io.quarkus.rest.data.panache.ResourceProperties;
+import br.com.gabriel.Service.DisciplinaService;
+import br.com.gabriel.DTO.DisciplinaDTO;
 
 @Path("/disciplinas")
 @Tag(name="Disciplinas")
@@ -37,6 +33,9 @@ public class DisciplinaResource {
 
     @Inject
     private DisciplinaRepository disciplinaRepository;
+
+    @Inject
+    private DisciplinaService disciplinaService;
 
     @GET    
     public List<Disciplina> buscarDisciplinas(){
@@ -49,46 +48,25 @@ public class DisciplinaResource {
         return Disciplina.findById(id);
     }
 
-    // @POST
-    // @Transactional    
-    // public Disciplina adicionarDisciplina(Disciplina Disciplina) {
-    //     Disciplina.persist();
-    //     return Disciplina ;
-    // }
-
     @POST
     @Transactional    
     public void adicionarDiciplina(@RequestBody DisciplinaDTO dto) {
-        Disciplina disciplina = new Disciplina();
-        disciplina.setNome(dto.getNome());    
-        disciplina.persist();    
+        disciplinaService.adicionarDisciplina(dto);   
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
-    public Disciplina update(@PathParam("id")Long id, Disciplina Disciplina) {
-        Disciplina entity = Disciplina.findById(id);
-        if(entity == null) {
-            throw new NotFoundException();
-        }
-
-        // map all fields from the Disciplina parameter to the existing entity
-        entity.nome = Disciplina.nome; 
-        
-
-        return entity;
+    public DisciplinaDTO updateDisciplina(@PathParam("id")Long id, DisciplinaDTO dto) {
+        disciplinaService.updateDisciplina(id, dto);
+        return dto;
     }
 
     @DELETE
     @Path("/{id}")
     @Transactional
     public String delete(@PathParam("id")Long id) {
-        Disciplina entity = Disciplina.findById(id);
-        if(entity == null) {
-            throw new NotFoundException();
-        }
-        entity.delete();
+        disciplinaService.deleteDisciplina(id);
         return "EXCLUIDO COM SUCESSO";
     }
 

@@ -28,8 +28,7 @@ import lombok.Setter;
 
 @Entity
 @Transactional
-@Getter
-@Setter
+
 public class Aluno extends PanacheEntityBase{
 
     @Id
@@ -59,6 +58,10 @@ public class Aluno extends PanacheEntityBase{
     public void setIdade(Integer idade) {
         this.idade = idade;
     }
+
+   
+
+  
 
    
     

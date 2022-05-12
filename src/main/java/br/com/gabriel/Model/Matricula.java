@@ -23,6 +23,4 @@ public class Matricula extends PanacheEntity{
     @ManyToOne
     public Disciplina disciplina;
 
-
-    
 }

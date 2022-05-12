@@ -2,6 +2,7 @@ package br.com.gabriel.Resource;
 
 import java.util.List;
 
+import javax.enterprise.inject.AmbiguousResolutionException;
 import javax.inject.Inject;
 import javax.persistence.Id;
 import javax.transaction.Transactional;
@@ -25,11 +26,9 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import br.com.gabriel.Model.Aluno;
-import br.com.gabriel.Model.Disciplina;
 import br.com.gabriel.Repository.AlunoRepository;
 import br.com.gabriel.Service.AlunoService;
 import br.com.gabriel.DTO.AlunoDTO;
-import io.quarkus.hibernate.orm.rest.data.panache.PanacheEntityResource;
 
 
 @Path("/alunos")
@@ -59,37 +58,22 @@ public class AlunoResource {
     @POST
     @Transactional    
     public void adicionarAluno(@RequestBody AlunoDTO dto) {
-        alunoService.adicionarAluno(dto);
-        // Aluno aluno = new Aluno();
-        // aluno.setNome(dto.getNome());
-        // aluno.setIdade(dto.getIdade());
-        // aluno.persist();    
+        alunoService.adicionarAluno(dto);   
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
-    public Aluno update(@PathParam("id")Long id, Aluno aluno) {
-        Aluno entity = Aluno.findById(id);
-        if(entity == null) {
-            throw new NotFoundException();
-        }
-        entity.nome = aluno.nome; 
-        entity.idade = aluno.idade;
-        
-
-        return entity;
+    public AlunoDTO updateAluno(@PathParam("id")Long id, AlunoDTO dto) {
+        alunoService.updateAluno(id, dto);
+         return dto;
     }
 
     @DELETE
     @Path("/{id}")
     @Transactional
-    public String delete(@PathParam("id")Long id) {
-        Aluno entity = Aluno.findById(id);
-        if(entity == null) {
-            throw new NotFoundException();
-        }
-        entity.delete();
+    public String deleteAluno(@PathParam("id")Long id) {
+        alunoService.deleteAluno(id);
         return "EXCLUIDO COM SUCESSO";
     }
 

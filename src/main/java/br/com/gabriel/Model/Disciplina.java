@@ -17,8 +17,7 @@ import lombok.Getter;
 import lombok.Setter;
  
 @Entity
-@Getter
-@Setter
+
 public class Disciplina extends PanacheEntity{
 
     public String nome;
