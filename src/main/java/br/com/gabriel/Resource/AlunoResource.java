@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.enterprise.inject.AmbiguousResolutionException;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
@@ -26,6 +27,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import br.com.gabriel.Model.Aluno;
+import br.com.gabriel.Model.Disciplina;
 import br.com.gabriel.Repository.AlunoRepository;
 import br.com.gabriel.Service.AlunoService;
 import br.com.gabriel.DTO.AlunoDTO;
@@ -43,6 +45,9 @@ public class AlunoResource {
 
     @Inject
     private AlunoService alunoService;
+
+    @Inject
+	EntityManager manager;
     
     @GET    
     public List<Aluno> buscarAlunos(){
@@ -54,6 +59,13 @@ public class AlunoResource {
     public Aluno get(@PathParam("id")Long id) {
         return Aluno.findById(id);
     }
+
+    // @GET
+    // @Path("/{id}/professores")
+    // public Object professorAluno(@PathParam("id")Long id) {
+    //     return manager.createQuery("select id from professor"
+    //     ).getSingleResult();
+    // }
 
     @POST
     @Transactional    

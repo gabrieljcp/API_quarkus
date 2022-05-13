@@ -21,6 +21,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import br.com.gabriel.DTO.ProfessorDTO;
 import br.com.gabriel.Model.Professor;
 import br.com.gabriel.Repository.ProfessorRepository;
+import br.com.gabriel.Service.ProfessorService;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheEntityResource;
 
 
@@ -34,6 +35,10 @@ public class ProfessorResource {
     @Inject
     private ProfessorRepository professorRepository;
 
+    @Inject
+    protected ProfessorService professorService;
+
+
     @GET    
     public List<Professor> buscarProfessor(){
         return professorRepository.listAll();
@@ -45,47 +50,25 @@ public class ProfessorResource {
         return Professor.findById(id);
     }
 
-    // @POST
-    // @Transactional    
-    // public Professor adicionarProfessor(Professor Professor) {
-    //     Professor.persist();
-    //     return Professor ;
-    // }
     @POST
     @Transactional    
     public void adicionarProfessor(@RequestBody ProfessorDTO dto) {
-        Professor professor = new Professor();
-        professor.setNome(dto.getNome());
-        professor.setIdade(dto.getIdade());
-        professor.persist();    
+        professorService.adicionarProfessor(dto);
     }
 
     @PUT
     @Path("/{id}")
     @Transactional
-    public Professor update(@PathParam("id")Long id, Professor Professor) {
-        Professor entity = Professor.findById(id);
-        if(entity == null) {
-            throw new NotFoundException();
-        }
-
-        // map all fields from the Professor parameter to the existing entity
-        entity.nome = Professor.nome; 
-        entity.idade = Professor.idade;
-        
-
-        return entity;
+    public String update(@PathParam("id")Long id, ProfessorDTO dto) {
+        professorService.updateProfessor(id, dto);
+        return "ATUALIZADO COM SUCESSO";
     }
 
     @DELETE
     @Path("/{id}")
     @Transactional
     public String delete(@PathParam("id")Long id) {
-        Professor entity = Professor.findById(id);
-        if(entity == null) {
-            throw new NotFoundException();
-        }
-        entity.delete();
+        professorService.deleteProfessor(id);
         return "EXCLUIDO COM SUCESSO";
     }
 
