@@ -5,10 +5,10 @@ import javax.persistence.ManyToOne;
 
 import br.com.gabriel.Model.Professor;
 
+
 public class DisciplinaDTO {
     
-    public String nome;
-   
+    public String nome; 
 
     public String getNome() {
         return nome;
@@ -18,4 +18,5 @@ public class DisciplinaDTO {
         this.nome = nome;
     }
 
+  
 }

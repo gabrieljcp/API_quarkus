@@ -3,6 +3,8 @@ package br.com.gabriel.Resource;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -33,6 +35,9 @@ import io.quarkus.hibernate.orm.rest.data.panache.PanacheEntityResource;
 public class ProfessorResource {
 
     @Inject
+    EntityManager em;
+
+    @Inject
     private ProfessorRepository professorRepository;
 
     @Inject
@@ -49,6 +54,12 @@ public class ProfessorResource {
     public Professor get(@PathParam("id")Long id) {
         return Professor.findById(id);
     }
+
+    @GET 
+    @Path("/{id}/disciplinas")   
+    public List<?> findDisciplinas(@PathParam("id")Long id){   
+        return professorRepository.findDisciplinas(id);      
+    } 
 
     @POST
     @Transactional    

@@ -7,7 +7,6 @@ import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -22,6 +21,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import br.com.gabriel.Model.Disciplina;
 import br.com.gabriel.Repository.DisciplinaRepository;
 import br.com.gabriel.Service.DisciplinaService;
+import br.com.gabriel.Service.ProfessorService;
 import br.com.gabriel.DTO.DisciplinaDTO;
 
 @Path("/disciplinas")
@@ -50,8 +50,9 @@ public class DisciplinaResource {
 
     @POST
     @Transactional    
-    public void adicionarDiciplina(@RequestBody DisciplinaDTO dto) {
-        disciplinaService.adicionarDisciplina(dto);   
+    public void adicionarDisciplina(@RequestBody DisciplinaDTO disciplinaDto) {
+        //professorService.adicionarProfessor(dto);   
+        disciplinaService.adicionarDisciplina(disciplinaDto);
     }
 
     @PUT

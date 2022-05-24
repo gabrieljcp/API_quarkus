@@ -25,8 +25,8 @@ public class Disciplina extends PanacheEntity{
     @OneToMany(mappedBy = "disciplina")
     private List<Matricula> matriculas; 
 
-    @ManyToOne
-    private Professor professor;
+    // @ManyToOne
+    // private Professor professor;
 
     public String getNome() {
         return nome;

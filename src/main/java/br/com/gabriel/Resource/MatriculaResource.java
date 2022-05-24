@@ -30,7 +30,7 @@ import br.com.gabriel.Service.MatriculaService;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheEntityResource;
 
 @Path("/matricula")
-@Tag(name="Matrículas")
+@Tag(name="Matrículas", description = "dos alunos nas disciplinas")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 
@@ -77,13 +77,11 @@ public class MatriculaResource {
     @PUT
     @Path("/{id}")
     @Transactional
-    public Matricula update(@PathParam("id")Long id, Matricula Vinculo) {
+    public static Matricula update(@PathParam("id")Long id, Matricula Vinculo) {
         Matricula entity = Vinculo.findById(id);
         if(entity == null) {
             throw new NotFoundException();
         }
-
-        // map all fields from the Vinculo parameter to the existing entity
         entity.aluno = Vinculo.aluno;
         entity.disciplina = Vinculo.disciplina;
         

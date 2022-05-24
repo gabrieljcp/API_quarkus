@@ -2,6 +2,7 @@ package br.com.gabriel.Model;
 
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -15,13 +16,15 @@ import lombok.Setter;
 @Transactional
 @Getter
 @Setter
+@ApplicationScoped
 public class Professor extends PanacheEntity{
 
     public String nome;
 
     public Integer idade;
 
-    @OneToMany(mappedBy = "professor")
+    //@OneToMany(mappedBy = "professor")
+    @OneToMany
     private List<Disciplina> disciplina; 
 
     public String getNome() {
@@ -38,6 +41,10 @@ public class Professor extends PanacheEntity{
 
     public void setIdade(Integer idade) {
         this.idade = idade;
+    }
+
+    public String getId() {
+        return null;
     }
 
     
